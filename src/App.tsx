@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import HeaderBar from './components/HeaderBar';
 import MovieCardList from './components/MovieCardList';
+import SearchBar from './components/SearchBar';
 
 export interface IMovie {
   name: string;
@@ -12,8 +13,11 @@ export interface IMovie {
   image:string;
 }
 
+
 function App() {
   const [movies, setMovies] = useState<IMovie[]>([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredMovies, setFilteredMovies] = useState(movies)
   
   useEffect(()=>{
     const fetchMovieData = async() =>{
@@ -21,14 +25,26 @@ function App() {
       let movieData = await res.json()
       setMovies(movieData)
     }
-
     fetchMovieData()
   },[])
+
+  useEffect(()=>{
+    if (movies.length) {
+    const newFilteredMovies = movies.filter(movie =>
+    movie.name.toLowerCase().includes(searchInput.toLowerCase())
+    )
+    setFilteredMovies(newFilteredMovies)}
+  },[movies,searchInput])
+
+  const onSearchChange=(e: React.FormEvent<HTMLInputElement>):void=>{
+    setSearchInput(e.currentTarget.value)
+  }
 
   return (
     <div className="App">
       <HeaderBar/>
-      <MovieCardList movies={movies}/>
+      <SearchBar searchInput={searchInput} searchChangeHandler={onSearchChange}/>
+      <MovieCardList movies={filteredMovies}/>
     </div>
   );
 }

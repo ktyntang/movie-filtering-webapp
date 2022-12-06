@@ -5,10 +5,10 @@ import React from 'react'
 
 const HeaderBar = ():JSX.Element => {
     return (
-        <header className="header">
+        <header className="bar header">
             <div className='logo'>
                 <FontAwesomeIcon className='icon' icon={faFilm}/>
-                <h1>Bluejay Productions</h1>
+                <h1>.birdProductions</h1>
             </div>
         </header>
       )
