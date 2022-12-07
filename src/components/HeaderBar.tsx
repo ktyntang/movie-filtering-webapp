@@ -7,7 +7,7 @@ const HeaderBar = ():JSX.Element => {
     return (
         <header className="bar header">
                 <FontAwesomeIcon className='icon' icon={faFilm}/>
-                <h1>.birdProductions</h1>
+                <h1>BluejayProductions</h1>
         </header>
       )
 }

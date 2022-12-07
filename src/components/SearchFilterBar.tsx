@@ -2,18 +2,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faMagnifyingGlass, faFilter} from '@fortawesome/free-solid-svg-icons'
 import React, { useState } from 'react'
 import FilterMenu from './FilterMenu';
+import './SearchBar.css'
 
 
 interface ISearchInputProps {
   searchInput:string;
-  searchChangeHandler:(e: React.FormEvent<HTMLInputElement>)=>void
+  searchChangeHandler:(e: React.ChangeEvent<HTMLInputElement>)=>void;
+  maxRange:number[]
+  filterChangeHandler:(selectedYearRange:number[])=>void
 }
 
-const SearchBar = ({searchInput,searchChangeHandler}:ISearchInputProps):JSX.Element => {
+const SearchFilterBar = ({searchInput,searchChangeHandler,maxRange,filterChangeHandler}:ISearchInputProps):JSX.Element => {
   const [isExpanded, setIsExpanded] = useState(false)
 
   const filterClickHandler = ():void =>{
-    console.log('click')
     setIsExpanded(isExpanded=>!isExpanded)
   }
 
@@ -35,8 +37,8 @@ const SearchBar = ({searchInput,searchChangeHandler}:ISearchInputProps):JSX.Elem
             Filter
             <FontAwesomeIcon className='icon small' icon={faFilter}/>
           </button>
-        {/* isExpanded && */}
-        <FilterMenu/>
+        {isExpanded && 
+        <FilterMenu maxRange={maxRange} filterChangeHandler={filterChangeHandler}/>}
         </div>
      
     
@@ -45,4 +47,4 @@ const SearchBar = ({searchInput,searchChangeHandler}:ISearchInputProps):JSX.Elem
 }
 
 
-export default SearchBar
+export default SearchFilterBar
