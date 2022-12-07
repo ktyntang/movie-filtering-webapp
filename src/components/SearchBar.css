@@ -1,0 +1,41 @@
+
+/* ----------------------------------------- */
+
+.filter-menu {
+    display:flex;
+    flex-direction: column;
+    position: absolute;
+    top:-1;
+    right:16px;
+    background-color: white;
+    border-radius: 10px;
+    padding:0 16px
+  }
+  
+.filter-menu li {
+    border:1px solid red;
+    padding:16px;
+    color:var(--main);
+    text-align:left;
+}
+  
+/* ----------------------------------------- */
+
+.range-picker {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center;
+  text-align: center; */
+}
+
+.range-picker input {
+    width:5rem;
+    height:2rem;
+    border-radius: 10px;
+    border: 1px solid var(--light);
+    color: var(--main);
+    /* margin-top:12px; */
+    text-align: center;
+    
+
+}
