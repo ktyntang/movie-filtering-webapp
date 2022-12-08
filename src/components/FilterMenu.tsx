@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import GenreList from './GenreList'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowRotateLeft,faMinus} from '@fortawesome/free-solid-svg-icons'
@@ -8,19 +8,21 @@ import {Range} from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 interface IFilterInputProps {
-  yearRange:number[]  
-  yearChangeHandler:(selectedYearRange:number[])=>void;
-  defaultGenreOptions:string[]
+  dataYearRange:number[]
+  yearInput:number[]
+  yearChangeHandler:(selectedYearRange:number[])=>void
+  dataGenreList:string[]
+  genreInput:string[]
   genreChangeHandler:(genreSelection:string[])=>void
 }
 
-const FilterMenu = ({yearRange,yearChangeHandler,defaultGenreOptions, genreChangeHandler}:IFilterInputProps):JSX.Element => {
+const FilterMenu = ({dataYearRange,yearChangeHandler,yearInput,dataGenreList,genreInput, genreChangeHandler}:IFilterInputProps):JSX.Element => {
   
-  const min:number = yearRange?.[0]
-  const max:number = yearRange?.[yearRange.length-1]
-
-  const [yearRangeDisplay,setYearRangeDisplay] = useState<number[]>([min,max])
-  const [filteredGenres,setFilteredGenres] = useState<string[]>(defaultGenreOptions)
+  const min:number = dataYearRange?.[0]
+  const max:number = dataYearRange?.[dataYearRange.length-1]
+ 
+  const [yearRangeDisplay,setYearRangeDisplay] = useState<number[]>(yearInput)
+  const [filteredGenres,setFilteredGenres] = useState<string[]>(genreInput)
 
   const onYearChange = (selectedYear:number[]):void=>{
     setYearRangeDisplay(selectedYear)
@@ -49,10 +51,8 @@ const FilterMenu = ({yearRange,yearChangeHandler,defaultGenreOptions, genreChang
               <FontAwesomeIcon className='icon small click' icon={faArrowRotateLeft}
               onClick={()=>{onYearChange([min,max])}}/>
             </div>
-            {yearRange && 
               <Range className='click' defaultValue={[min, max]} min={min} max={max}
               value={yearRangeDisplay} onChange={(selectedYear)=>onYearChange(selectedYear)}/>
-            }
              <div className='range-display'>
                 <h5>{yearRangeDisplay[0]??'MIN'}</h5>
                 <FontAwesomeIcon className='icon small' icon={faMinus}/>
@@ -65,10 +65,10 @@ const FilterMenu = ({yearRange,yearChangeHandler,defaultGenreOptions, genreChang
               <p>Filter by Genre</p>
               <FontAwesomeIcon className='icon small click' icon={faArrowRotateLeft}
               onClick={()=>{
-                setFilteredGenres(defaultGenreOptions)
-                genreChangeHandler(defaultGenreOptions)}}/>
+                setFilteredGenres(dataGenreList)
+                genreChangeHandler(dataGenreList)}}/>
             </div>
-            <GenreList defaultGenreOptions={defaultGenreOptions} onGenreClick={onGenreClick} filteredGenres={filteredGenres}/>
+            <GenreList dataGenreList={dataGenreList} onGenreClick={onGenreClick} filteredGenres={filteredGenres}/>
           </li>
         </ul>
       )

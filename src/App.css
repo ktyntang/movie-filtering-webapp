@@ -126,13 +126,17 @@ ol,ul {
 
 /* -------------------------------------- */
 
+.main {
+  width: 100%;
+  min-height: 85vh;
+}
+
 .movie-card-gallery {
   margin:16px 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 1em;
   width: 100%;
-  min-height: 85vh;
   justify-content: center;
   box-sizing: border-box;
   padding:32px;

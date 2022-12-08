@@ -1,16 +1,13 @@
-
-import React, { useState } from 'react'
-
 interface IGenreListProps {
-  defaultGenreOptions: string[]
+  dataGenreList: string[]
   onGenreClick:(e:React.ChangeEvent<HTMLInputElement>)=>void
   filteredGenres: string[]
 }
 
-const GenreList = ({defaultGenreOptions, onGenreClick,filteredGenres}:IGenreListProps):JSX.Element => {
+const GenreList = ({dataGenreList, onGenreClick,filteredGenres}:IGenreListProps):JSX.Element => {
   return (
     <div className='genre-list'>
-      {defaultGenreOptions.map((genre) => {
+      {dataGenreList.map((genre) => {
         return (
 
           <label>
