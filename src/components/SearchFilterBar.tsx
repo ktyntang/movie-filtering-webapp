@@ -4,17 +4,17 @@ import React, { useState } from 'react'
 import FilterMenu from './FilterMenu';
 import './SearchBar.css'
 
-
 interface ISearchInputProps {
   searchInput:string;
   searchChangeHandler:(e: React.ChangeEvent<HTMLInputElement>)=>void;
-  maxRange:number[]
-  filterChangeHandler:(selectedYearRange:number[])=>void
+  yearRange:number[]
+  yearChangeHandler:(selectedYearRange:number[])=>void
+  defaultGenreOptions:string[]
+  genreChangeHandler:(genreSelection:string[])=>void
 }
 
-const SearchFilterBar = ({searchInput,searchChangeHandler,maxRange,filterChangeHandler}:ISearchInputProps):JSX.Element => {
-  const [isExpanded, setIsExpanded] = useState(false)
-
+const SearchFilterBar = ({searchInput,searchChangeHandler,yearRange,yearChangeHandler,defaultGenreOptions,genreChangeHandler}:ISearchInputProps):JSX.Element => {
+  const [isExpanded, setIsExpanded] = useState<boolean>(false)
   const filterClickHandler = ():void =>{
     setIsExpanded(isExpanded=>!isExpanded)
   }
@@ -33,12 +33,12 @@ const SearchFilterBar = ({searchInput,searchChangeHandler,maxRange,filterChangeH
         </div>
         
         <div className='filter-input'>
-          <button type="button" onClick={filterClickHandler}>
+          <button type="button" onClick={filterClickHandler} >
             Filter
             <FontAwesomeIcon className='icon small' icon={faFilter}/>
           </button>
         {isExpanded && 
-        <FilterMenu maxRange={maxRange} filterChangeHandler={filterChangeHandler}/>}
+        <FilterMenu yearRange={yearRange} defaultGenreOptions={defaultGenreOptions} yearChangeHandler={yearChangeHandler} genreChangeHandler={genreChangeHandler}/>}
         </div>
      
     
