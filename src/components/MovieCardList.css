@@ -1,0 +1,51 @@
+.movie-spotlight {
+    background-color: var(--dark);
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin:0 5%;
+    padding:5%;
+    position:fixed;
+    top:25vh;
+    display: flex;
+    flex-direction: row;
+    height:75vh
+}
+
+.movie-spotlight .details {
+    max-height: 90%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    padding:0 32px;
+    text-align:left;
+    line-height:1.5;
+}
+
+.movie-spotlight .detail-toggle {
+    margin:32px 0;
+    color:var(--lighter);
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+    justify-content: center;
+}
+
+.movie-spotlight .main-panel {
+    box-sizing: border-box;
+    max-height: 100%;
+    margin-left:32px;
+    max-height: 75vh;
+
+}
+
+
+.movie-spotlight .icon.close {
+    position: absolute;
+    top:0;
+    right:0;
+    padding:24px;
+    margin:0
+}

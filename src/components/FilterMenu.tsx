@@ -8,18 +8,18 @@ import {Range} from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 interface IFilterInputProps {
-  dataYearRange:number[]
+  defaultYears:number[]
   yearInput:number[]
   yearChangeHandler:(selectedYearRange:number[])=>void
-  dataGenreList:string[]
+  defaultGenres:string[]
   genreInput:string[]
   genreChangeHandler:(genreSelection:string[])=>void
 }
 
-const FilterMenu = ({dataYearRange,yearChangeHandler,yearInput,dataGenreList,genreInput, genreChangeHandler}:IFilterInputProps):JSX.Element => {
+const FilterMenu = ({defaultYears,yearChangeHandler,yearInput,defaultGenres,genreInput, genreChangeHandler}:IFilterInputProps):JSX.Element => {
   
-  const min:number = dataYearRange?.[0]
-  const max:number = dataYearRange?.[dataYearRange.length-1]
+  const min:number = defaultYears?.[0]
+  const max:number = defaultYears?.[defaultYears.length-1]
  
   const [yearRangeDisplay,setYearRangeDisplay] = useState<number[]>(yearInput)
   const [filteredGenres,setFilteredGenres] = useState<string[]>(genreInput)
@@ -65,10 +65,10 @@ const FilterMenu = ({dataYearRange,yearChangeHandler,yearInput,dataGenreList,gen
               <p>Filter by Genre</p>
               <FontAwesomeIcon className='icon small click' icon={faArrowRotateLeft}
               onClick={()=>{
-                setFilteredGenres(dataGenreList)
-                genreChangeHandler(dataGenreList)}}/>
+                setFilteredGenres(defaultGenres)
+                genreChangeHandler(defaultGenres)}}/>
             </div>
-            <GenreList dataGenreList={dataGenreList} onGenreClick={onGenreClick} filteredGenres={filteredGenres}/>
+            <GenreList defaultGenres={defaultGenres} onGenreClick={onGenreClick} filteredGenres={filteredGenres}/>
           </li>
         </ul>
       )

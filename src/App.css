@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&family=Ubuntu:ital,wght@0,300;1,300&display=swap');
 
 :root {
-  --lightest: #D8DBE2;
+  --lightest: #e6e9f1;
   --lighter:#bacee3;
   --light:#717d8a;
-  --main:#488790;
+  --main:#369bad;
   --dark:  #2e3444;
   --darker:#29292e;
   --darkest:#1B1B1E;
@@ -24,7 +24,7 @@ h1 {
 
 h3 {
   font-size: 1rem;
-  color: var(--light);
+  color: var(--main);
 }
 
 p {
@@ -54,12 +54,6 @@ ol,ul {
   top:0;
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 /* -------------------------------------- */
 .bar {
   width:100%;
@@ -91,58 +85,82 @@ ol,ul {
 .icon.small {
   font-size: 1rem;
 }
-
-.click {
-  cursor:pointer
-}
-
-
 /* -------------------------------------- */
 
-
-.movie-card {
-  box-sizing: border-box;
-  border-radius: 10px;
-  width: fit-content;
+.click {
   transition: transform 250ms ease-out;
 }
 
-.movie-card:hover {
-  box-shadow: 0 0 5px var(--darkest);
+.click:hover {
   transform: scale(1.1);
-  cursor: pointer; 
+  cursor: pointer;
 }
 
-.movie-card:active {
+.click:active {
   transform: scale(1.05);
 }
 
+/* -------------------------------------- */
+
+.movie-card {
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 10px;
+  width: fit-content;
+  margin:0 24px 24px 24px;
+  padding:16px;
+}
+
+.movie-card:hover {
+  box-shadow: 0 0 3px black;
+}
 
 .movie-card img {
-  border-radius: 10px;
-  margin: 0.5em;
+  border-radius: 10px 10px 0 0;
   object-fit:contain;
 }
+
+.movie-card .card-header {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding:0 16px;
+  border-radius: 0 0 10px 10px;
+  margin:0;
+  background-color: rgb(0, 0, 0,0.25);
+  text-shadow: 0.5px 0.5px var(--lighter);
+
+}
+
 
 /* -------------------------------------- */
 
 .main {
   width: 100%;
-  min-height: 85vh;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
 }
 
 .movie-card-gallery {
   margin:16px 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 1em;
+  display: block;
   width: 100%;
   justify-content: center;
   box-sizing: border-box;
   padding:32px;
+  max-height: 75vh;
   overflow-y: scroll;
+  position:relative
 }
 
+
+.movie-card-gallery .movie-spotlight img {
+  border-radius: 10px;
+}
 
 /* -------------------------------------- */
 
@@ -174,11 +192,11 @@ ol,ul {
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background:var(--lightest); 
+  background:var(--light); 
   border-radius:5px
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--light); 
+  background: var(--lighter); 
 }

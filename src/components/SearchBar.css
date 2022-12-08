@@ -46,7 +46,7 @@ input:focus{
 }
 .filter-input button {
   font-size: 1rem;
-  color:var(--main);
+  color:var(--light);
   background: white;
   border-radius:10px;
   padding:0 0.5rem 0 1em ;
@@ -58,6 +58,9 @@ input:focus{
   justify-content:space-between;  
 }
 
+.filter-input .icon {
+  color:var(--main)
+}
 
 /* ----------------------------------------- */
 

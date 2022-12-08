@@ -5,15 +5,15 @@ import FilterMenu from './FilterMenu';
 import './SearchBar.css'
 
 interface IFilterInputProps {
-  dataYearRange:number[]
+  defaultYears:number[]
   yearInput:number[]
   yearChangeHandler:(selectedYearRange:number[])=>void
-  dataGenreList:string[]
+  defaultGenres:string[]
   genreInput:string[]
   genreChangeHandler:(genreSelection:string[])=>void
 }
 
-const FilterContainer = ({dataYearRange,yearInput,yearChangeHandler,dataGenreList,genreInput,genreChangeHandler}:IFilterInputProps):JSX.Element => {
+const FilterContainer = ({defaultYears,yearInput,yearChangeHandler,defaultGenres,genreInput,genreChangeHandler}:IFilterInputProps):JSX.Element => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
   const filterClickHandler = ():void =>{
     setIsExpanded(isExpanded=>!isExpanded)
@@ -22,14 +22,14 @@ const FilterContainer = ({dataYearRange,yearInput,yearChangeHandler,dataGenreLis
 
   return (
         <div className='filter-input'>
-          <button type="button" onClick={filterClickHandler} >
+          <button className='click' type="button" onClick={filterClickHandler} >
             Filter
             <FontAwesomeIcon className='icon small' icon={faFilter}/>
           </button>
         {isExpanded && 
         <FilterMenu 
-        dataYearRange={dataYearRange} yearInput={yearInput} yearChangeHandler={yearChangeHandler}
-        dataGenreList={dataGenreList} genreInput={genreInput} genreChangeHandler={genreChangeHandler}/>}
+        defaultYears={defaultYears} yearInput={yearInput} yearChangeHandler={yearChangeHandler}
+        defaultGenres={defaultGenres} genreInput={genreInput} genreChangeHandler={genreChangeHandler}/>}
         </div>
       )
 }

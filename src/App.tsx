@@ -5,6 +5,8 @@ import HeaderBar from './components/HeaderBar';
 import MovieCardList from './components/MovieCardList';
 import SearchBar from './components/SearchBar';
 
+
+
 export interface IMovie {
   name: string;
   productionYear: number;
@@ -14,7 +16,7 @@ export interface IMovie {
   image:string;
 }
 
-export interface IFilterParams {
+interface IFilterParams {
   searchString:string;
   productionYearSelection: number[];
   genreSelection: string[];
@@ -44,8 +46,10 @@ function App() {
             throw new Error('API fetch error')}
           })
           .then((data:IMovie[]) => {
-            setIsLoaded(true)
+            
             setMovies(data)
+            setIsLoaded(true)
+
             const dataYearRange = data.map(movie=>movie.productionYear).sort()
             const dataGenreList = Array.from(new Set(data.map(movie=>movie.genre)))
             const maxYearRange = [dataYearRange[0],dataYearRange[dataYearRange.length-1]]
@@ -78,8 +82,8 @@ function App() {
     setFilteredMovies(newFilteredMovies)}
   },[movies,filterParams])
 
-  const dataYearRange = movies?.map(movie=>movie.productionYear).sort()
-  const dataGenreList = Array.from(new Set(movies?.map(movie=>movie.genre)))
+  const defaultYears = movies?.map(movie=>movie.productionYear).sort()
+  const defaultGenres = Array.from(new Set(movies?.map(movie=>movie.genre)))
 
  
   const onSearchChange=(e: React.ChangeEvent<HTMLInputElement>):void=>{
@@ -104,10 +108,10 @@ function App() {
 
       <div className='search bar'>
           <SearchBar 
-          searchInput={filterParams.searchString} searchChangeHandler={onSearchChange}/>
+            searchInput={filterParams.searchString} searchChangeHandler={onSearchChange}/>
           <FilterContainer 
-          dataYearRange ={dataYearRange} yearInput={filterParams.productionYearSelection} yearChangeHandler ={onYearChange} 
-          dataGenreList ={dataGenreList} genreInput={filterParams.genreSelection} genreChangeHandler={onGenreChange}/>
+            defaultYears={defaultYears} yearInput={filterParams.productionYearSelection} yearChangeHandler ={onYearChange} 
+            defaultGenres ={defaultGenres} genreInput={filterParams.genreSelection} genreChangeHandler={onGenreChange}/>
       </div>
     
       <div className='main'>
@@ -117,10 +121,10 @@ function App() {
           <button onClick={()=>window.location.reload()}>Refresh</button>
         </div>}
         {!error && !isLoaded && <p>Loading...</p>}
-        {!error && isLoaded && !!filteredMovies.length &&
-        <MovieCardList movies={filteredMovies}/>}
+        {!error && isLoaded && filteredMovies.length>0 &&
+          <MovieCardList movies={filteredMovies}/>}
         {!error && isLoaded && !filteredMovies.length && 
-        <div>No movies found</div>}
+          <div>No movies found</div>}
       </div>
     
     </div>  
