@@ -64,7 +64,7 @@ ol,ul {
   justify-content:space-between;
   box-sizing: border-box;
   padding:0 16px;
-  margin: 10px 0;
+  margin-top: 16px;
   z-index:2;
   position: relative;
 }
@@ -73,7 +73,7 @@ ol,ul {
   justify-content: left;
   color:var(--lighter);
   font-style: italic;
-  margin-top: 32px;
+  margin:0;
 }
 
 .icon {
@@ -137,24 +137,27 @@ ol,ul {
 /* -------------------------------------- */
 
 .main {
-  width: 100%;
+  width: 100vw;
   height: 85vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items:center;
+  /* border: 1px solid red; */
+  flex-grow: 1;
 }
 
 .movie-card-gallery {
-  margin:16px 0;
   display: block;
-  width: 100%;
+  width: 100vw;
   justify-content: center;
   box-sizing: border-box;
-  padding:32px;
+  padding:0 3vh;
   max-height: 75vh;
   overflow-y: scroll;
-  position:relative
+  position:relative;
+  /* border: 1px solid red; */
+
 }
 
 

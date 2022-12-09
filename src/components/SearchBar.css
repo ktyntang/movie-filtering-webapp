@@ -69,11 +69,12 @@ input:focus{
     flex-direction: column;
     position: absolute;
     top:-1;
-    right:16px;
+    right:0;
     background-color: white;
     border-radius: 10px;
     padding:0 16px;
-    width:20%;
+    width:max-content;
+    height: fit-content;
     margin-top: 16px;
   }
   

@@ -1,14 +1,25 @@
+.movie-spotlight-wrapper{
+    position: absolute;
+    height:100%;
+    width: 100%;
+}
+
 .movie-spotlight {
     background-color: var(--dark);
     box-sizing: border-box;
     border-radius: 10px;
     margin:0 5%;
     padding:5%;
-    position:fixed;
-    top:25vh;
+    position:absolute;
+    top:0;
     display: flex;
     flex-direction: row;
-    height:75vh
+    height:75vh;
+}
+
+.movie-spotlight h1{
+    margin:0;
+    margin-bottom:2rem
 }
 
 .movie-spotlight .details {
@@ -21,6 +32,7 @@
     text-align:left;
     line-height:1.5;
 }
+
 
 .movie-spotlight .detail-toggle {
     margin:32px 0;

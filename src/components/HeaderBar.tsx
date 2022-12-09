@@ -1,15 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilm} from '@fortawesome/free-solid-svg-icons'
-import React from 'react'
+import { faFilm } from '@fortawesome/free-solid-svg-icons'
 
-
-const HeaderBar = ():JSX.Element => {
-    return (
-        <header className="bar header">
-                <FontAwesomeIcon className='icon' icon={faFilm}/>
-                <h1>BluejayProductions</h1>
-        </header>
-      )
+const HeaderBar = (): JSX.Element => {
+  return (
+    <header className="bar header">
+      <FontAwesomeIcon className='icon' icon={faFilm} />
+      <h1>BluejayProductions</h1>
+    </header>
+  )
 }
 
 
