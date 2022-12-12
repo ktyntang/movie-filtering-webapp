@@ -4,9 +4,9 @@ import HeaderBar from "./components/HeaderBar";
 import MovieCardList from "./components/MovieCardList";
 import MovieSpotlight from "./components/MovieSpotlight";
 import SearchBar from "./components/SearchBar";
-import "./App.css";
 import Loader from "./components/Loader";
 import retryPromise from "./utils/retryPromise";
+import "./App.css";
 
 
 export interface IMovie {
@@ -42,6 +42,7 @@ function App() {
     productionYearSelection: [],
     genreSelection: [],
   });
+
   const [filteredMovies, setFilteredMovies] = useState(movies);
   const [movieSpotlight, setMovieSpotlight] = useState<IMovie>(emptyMovie)
 
@@ -79,18 +80,16 @@ function App() {
         const dataYearRange = data
           .map((movie) => movie.productionYear)
           .sort();
-        const dataGenreList = Array.from(
-          new Set(data.map((movie) => movie.genre))
-        );
-        const maxYearRange = [
-          dataYearRange[0],
-          dataYearRange[dataYearRange.length - 1],
-        ];
 
         setFilterParams({
           searchString: "",
-          productionYearSelection: maxYearRange,
-          genreSelection: dataGenreList,
+          productionYearSelection: [
+            dataYearRange[0],
+            dataYearRange[dataYearRange.length - 1]
+          ],
+          genreSelection: Array.from(
+            new Set(data.map((movie) => movie.genre))
+          ),
         });
       })
       .catch((error) => {
