@@ -2,12 +2,19 @@ import { IMovie } from '../App'
 import MovieCard from './MovieCard'
 import './MovieCardList.css'
 
+// TYPES
+// ---------------------------------------------------------
 interface Props {
     movies: IMovie[]
     movieClickHandler: (movie: IMovie) => void
 }
 
+// COMPONENT
+// ---------------------------------------------------------
 const MovieCardList = ({ movies, movieClickHandler }: Props) => {
+
+    // RENDER
+    // ---------------------------------------------------------
     return (
         <div className='movie-card-gallery'>
             {movies.map((movie) => {

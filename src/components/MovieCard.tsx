@@ -2,13 +2,23 @@ import { motion } from "framer-motion"
 import { IMovie } from '../App'
 import { ReactElement, useState } from "react"
 
+// TYPES
+// ---------------------------------------------------------
 interface Props {
     movie: IMovie
     movieClickHandler: (movie: IMovie) => void
 }
 
+// COMPONENT
+// ---------------------------------------------------------
 const MovieCard = ({ movie, movieClickHandler }: Props): ReactElement => {
+
+    // STATES
+    // ---------------------------------------------------------
     const [imgLoaded, setImgLoaded] = useState(false)
+
+    // RENDER
+    // ---------------------------------------------------------
     return (
         <div className='movie-card click' onClick={() => movieClickHandler(movie)}>
             <motion.div

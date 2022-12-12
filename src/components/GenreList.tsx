@@ -1,30 +1,36 @@
+// TYPES
+// ---------------------------------------------------------
 interface IGenreListProps {
   defaultGenres: string[]
-  onGenreClick:(e:React.ChangeEvent<HTMLInputElement>)=>void
+  onGenreClick: (e: React.ChangeEvent<HTMLInputElement>) => void
   filteredGenres: string[]
 }
 
-const GenreList = ({defaultGenres, onGenreClick,filteredGenres}:IGenreListProps):JSX.Element => {
+// COMPONENT
+// ---------------------------------------------------------
+const GenreList = ({ defaultGenres, onGenreClick, filteredGenres }: IGenreListProps): JSX.Element => {
+
+  // RENDER
+  // ---------------------------------------------------------
   return (
     <div className='genre-list'>
       {defaultGenres.map((genre) => {
         return (
-
           <label>
-          <input
-            type="checkbox"
-            name={genre}
-            value={genre}
-            onChange={e=>onGenreClick(e)}
-            checked={filteredGenres.includes(genre)? true : false}
+            <input
+              type="checkbox"
+              name={genre}
+              value={genre}
+              onChange={e => onGenreClick(e)}
+              checked={filteredGenres.includes(genre) ? true : false}
             />
-          {genre}</label>
+            {genre}</label>
 
         )
       })}
     </div>
 
-      )
+  )
 }
 
 

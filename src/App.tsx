@@ -5,10 +5,12 @@ import MovieCardList from "./components/MovieCardList";
 import MovieSpotlight from "./components/MovieSpotlight";
 import SearchBar from "./components/SearchBar";
 import Loader from "./components/Loader";
+import ErrorMessage from "./components/ErrorMessage";
 import retryPromise from "./utils/retryPromise";
 import "./App.css";
 
-
+// TYPES
+// ---------------------------------------------------------
 export interface IMovie {
   name: string;
   productionYear: number;
@@ -33,7 +35,11 @@ const emptyMovie: IMovie = {
   image: ""
 }
 
+// APP
+// ---------------------------------------------------------
 function App() {
+  // STATES
+  // ---------------------------------------------------------
   const [movies, setMovies] = useState<IMovie[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(false);
@@ -46,12 +52,6 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState(movies);
   const [movieSpotlight, setMovieSpotlight] = useState<IMovie>(emptyMovie)
 
-  const movieClickHandler = (movie: IMovie): void => {
-    setMovieSpotlight(movie)
-  }
-  const spotlightCloseHandler = (): void => {
-    setMovieSpotlight(emptyMovie)
-  }
 
   // FETCH MOVIES FROM API WITH RETRIES
   // ---------------------------------------------------------
@@ -74,23 +74,6 @@ function App() {
       .then((data: IMovie[]) => {
         setMovies(data);
         setIsLoaded(true);
-
-        //SET DEFAULT MIN MAX RANGES FOR FILTERS
-        // ---------------------------------------------------------
-        const dataYearRange = data
-          .map((movie) => movie.productionYear)
-          .sort();
-
-        setFilterParams({
-          searchString: "",
-          productionYearSelection: [
-            dataYearRange[0],
-            dataYearRange[dataYearRange.length - 1]
-          ],
-          genreSelection: Array.from(
-            new Set(data.map((movie) => movie.genre))
-          ),
-        });
       })
       .catch((error) => {
         setError(true);
@@ -98,23 +81,48 @@ function App() {
   }, []);
 
 
+  //SET INITIAL MIN MAX RANGES FOR FILTERS
+  // ---------------------------------------------------------
+  useEffect(() => {
+    if (movies) {
+      const dataYearRange = movies
+        .map((movie) => movie.productionYear)
+        .sort();
+
+      setFilterParams({
+        searchString: "",
+        productionYearSelection: [
+          dataYearRange[0],
+          dataYearRange[dataYearRange.length - 1]
+        ],
+        genreSelection: Array.from(
+          new Set(movies.map((movie) => movie.genre))
+        ),
+      });
+    }
+  }, [movies])
+
+
   //FILTER MOVIES BASED ON USER INPUT
   // ---------------------------------------------------------
   useEffect(() => {
     if (movies) {
       const newFilteredMovies = movies.filter(
-        (movie) =>
-          movie.name.toLowerCase()
+        ({ name, productionYear, genre }) =>
+          // search string
+          name.toLowerCase()
             .includes(filterParams.searchString.toLowerCase())
           &&
-          movie.productionYear >=
+          // year selection
+          productionYear >=
           filterParams.productionYearSelection[0]
           &&
-          movie.productionYear <=
+          productionYear <=
           filterParams.productionYearSelection[1]
           &&
+          // genre selection
           filterParams.genreSelection
-            .includes(movie.genre)
+            .includes(genre)
       );
       setFilteredMovies(newFilteredMovies);
     }
@@ -145,8 +153,20 @@ function App() {
     });
   };
 
-  // ---------------------------------------------------------
 
+  // SPOTLIGHT MOVIE SELECTION HANDLERS
+  // ---------------------------------------------------------
+  const movieClickHandler = (movie: IMovie): void => {
+    setMovieSpotlight(movie)
+  }
+  const spotlightCloseHandler = (): void => {
+    setMovieSpotlight(emptyMovie)
+  }
+
+
+
+  // RENDER
+  // ---------------------------------------------------------
   const defaultYears = movies?.map((movie) => movie.productionYear).sort();
   const defaultGenres = Array.from(
     new Set(movies?.map((movie) => movie.genre))
@@ -172,17 +192,7 @@ function App() {
       </div>
 
       <div className="main">
-        {error && (
-          <div>
-            <p>
-              Sorry something went wrong. Please refresh the page
-              to reload movies.
-            </p>
-            <button onClick={() => window.location.reload()}>
-              Refresh
-            </button>
-          </div>
-        )}
+        {error && <ErrorMessage />}
         {!error && !isLoaded && <Loader />}
         {!error && isLoaded && filteredMovies.length > 0 && (
           <div>

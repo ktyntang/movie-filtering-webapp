@@ -1,12 +1,14 @@
-import { motion } from "framer-motion"
 import React, { useState } from 'react'
-import GenreList from './GenreList'
+import { motion } from "framer-motion"
+import { Range } from 'rc-slider';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRotateLeft, faMinus } from '@fortawesome/free-solid-svg-icons'
-import './SearchBar.css'
-import { Range } from 'rc-slider';
+import GenreList from './GenreList'
 import 'rc-slider/assets/index.css';
+import './SearchBar.css'
 
+// TYPES
+// ---------------------------------------------------------
 interface IFilterInputProps {
   defaultYears: number[]
   yearInput: number[]
@@ -16,14 +18,20 @@ interface IFilterInputProps {
   genreChangeHandler: (genreSelection: string[]) => void
 }
 
+
+// COMPONENT
+// ---------------------------------------------------------
+
 const FilterMenu = ({ defaultYears, yearChangeHandler, yearInput, defaultGenres, genreInput, genreChangeHandler }: IFilterInputProps): JSX.Element => {
 
-  const min: number = defaultYears?.[0]
-  const max: number = defaultYears?.[defaultYears.length - 1]
-
+  // STATES
+  // ---------------------------------------------------------
   const [yearRangeDisplay, setYearRangeDisplay] = useState<number[]>(yearInput)
   const [filteredGenres, setFilteredGenres] = useState<string[]>(genreInput)
 
+
+  // FILTER SELECTION HANDLERS
+  // ---------------------------------------------------------
   const onYearChange = (selectedYear: number[]): void => {
     setYearRangeDisplay(selectedYear)
     yearChangeHandler(selectedYear)
@@ -42,6 +50,11 @@ const FilterMenu = ({ defaultYears, yearChangeHandler, yearInput, defaultGenres,
     genreChangeHandler(newGenreList)
   }
 
+
+  // RENDER
+  // ---------------------------------------------------------
+  const min: number = defaultYears?.[0]
+  const max: number = defaultYears?.[defaultYears.length - 1]
 
   return (
     <motion.ul

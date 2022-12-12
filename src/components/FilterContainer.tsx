@@ -5,6 +5,9 @@ import { useState } from 'react'
 import FilterMenu from './FilterMenu';
 import './SearchBar.css'
 
+
+// TYPES
+// ---------------------------------------------------------
 interface IFilterInputProps {
   defaultYears: number[]
   yearInput: number[]
@@ -14,13 +17,24 @@ interface IFilterInputProps {
   genreChangeHandler: (genreSelection: string[]) => void
 }
 
+
+// COMPONENT
+// ---------------------------------------------------------
 const FilterContainer = ({ defaultYears, yearInput, yearChangeHandler, defaultGenres, genreInput, genreChangeHandler }: IFilterInputProps): JSX.Element => {
+
+  // STATES
+  // ---------------------------------------------------------
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
+
+
+  // BUTTON CLICK HANDLER
+  // ---------------------------------------------------------
   const filterClickHandler = (): void => {
     setIsExpanded(isExpanded => !isExpanded)
   }
 
-
+  // RENDER
+  // ---------------------------------------------------------
   return (
     <div className='filter-input'>
       <button className='click' type="button" onClick={filterClickHandler} >
