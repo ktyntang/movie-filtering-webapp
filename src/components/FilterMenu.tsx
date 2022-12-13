@@ -62,7 +62,7 @@ const FilterMenu = ({ defaultYears, yearChangeHandler, yearInput, defaultGenres,
       animate={{ x: "0%" }}
       exit={{ x: "300%" }}
     >
-      <ul className="filter-menu">
+      <ul className="filter-menu" title='filter-menu'>
         <li className="filter-item year">
           <div className='menu-header'>
             <p>Filter by Year</p>

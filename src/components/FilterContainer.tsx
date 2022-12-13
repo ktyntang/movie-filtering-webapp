@@ -37,7 +37,7 @@ const FilterContainer = ({ defaultYears, yearInput, yearChangeHandler, defaultGe
   // ---------------------------------------------------------
   return (
     <div className='filter-input'>
-      <button className='click' type="button" onClick={filterClickHandler} >
+      <button className='click' type="button" title='toggle-filter-menu' onClick={filterClickHandler} >
         Filter
         <FontAwesomeIcon className='icon small' icon={faFilter} />
       </button>

@@ -16,7 +16,7 @@ const GenreList = ({ defaultGenres, onGenreClick, filteredGenres }: IGenreListPr
     <div className='genre-list'>
       {defaultGenres.map((genre) => {
         return (
-          <label>
+          <label key={genre}>
             <input
               type="checkbox"
               name={genre}

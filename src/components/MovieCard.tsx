@@ -20,7 +20,7 @@ const MovieCard = ({ movie, movieClickHandler }: Props): ReactElement => {
     // RENDER
     // ---------------------------------------------------------
     return (
-        <div className='movie-card click' onClick={() => movieClickHandler(movie)}>
+        <div className='movie-card click' title="movie-card" onClick={() => movieClickHandler(movie)}>
             <motion.div
                 initial={{ opacity: 0.5, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
