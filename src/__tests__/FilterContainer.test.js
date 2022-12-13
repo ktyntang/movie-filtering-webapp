@@ -6,8 +6,8 @@ const mockHandleClick = jest.fn();
 
 // -----------------------------------------------------------------------
 
-describe("FILTER DROPDOWN TOGGLE", () => {
-	test("when filter button clicked once, renders filter menu", () => {
+describe("FILTER BUTTON TOGGLE", () => {
+	test("when clicked once, renders filter menu", () => {
 		render(
 			<FilterContainer
 				defaultYears={["2003", "2018"]}
@@ -23,7 +23,7 @@ describe("FILTER DROPDOWN TOGGLE", () => {
 		expect(screen.getByTitle("filter-menu")).toBeInTheDocument();
 	});
 
-	test("when filter button clicked twice, menu closes", async () => {
+	test("when clicked twice, closes filter menu", async () => {
 		render(
 			<FilterContainer
 				defaultYears={["2003", "2018"]}
@@ -40,5 +40,23 @@ describe("FILTER DROPDOWN TOGGLE", () => {
 		await waitFor(() => {
 			expect(screen.queryByTitle("filter-menu")).toBeNull();
 		});
+	});
+
+	test("when clicked thirce, renders filter menu", () => {
+		render(
+			<FilterContainer
+				defaultYears={["2003", "2018"]}
+				yearInput={[]}
+				yearChangeHandler={mockHandleClick}
+				defaultGenres={["a", "b", "c"]}
+				genreInput={["a"]}
+				genreChangeHandler={mockHandleClick}
+			/>
+		);
+		expect.assertions(1);
+		userEvent.click(screen.getByTitle("toggle-filter-menu"));
+		userEvent.click(screen.getByTitle("toggle-filter-menu"));
+		userEvent.click(screen.getByTitle("toggle-filter-menu"));
+		expect(screen.getByTitle("filter-menu")).toBeInTheDocument();
 	});
 });
