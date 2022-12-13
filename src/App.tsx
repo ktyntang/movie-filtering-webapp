@@ -20,7 +20,7 @@ export interface IMovie {
   image: string;
 }
 
-interface IFilterParams {
+export interface IFilterParams {
   searchString: string;
   productionYearSelection: number[];
   genreSelection: string[];
@@ -61,7 +61,7 @@ function App() {
         "https://remarkable-bombolone-51a3d9.netlify.app/.netlify/functions/movies"
       ),
       {
-        retryIf: (response: Response) => true, // you could check before trying again
+        retryIf: (response: Response) => true,
         retries: 5,
       }
     ).then((res) => {

@@ -18,7 +18,7 @@ const MovieCardList = ({ movies, movieClickHandler }: Props) => {
     return (
         <div className='movie-card-gallery'>
             {movies.map((movie) => {
-                return <MovieCard movie={movie} movieClickHandler={movieClickHandler} />;
+                return <MovieCard movie={movie} movieClickHandler={movieClickHandler} key={`${movie.name} ${movie.productionYear}`} />;
             })
             }
         </div >
